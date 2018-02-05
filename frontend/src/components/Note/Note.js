@@ -5,6 +5,7 @@ const Note = props => {
     <div key={props.note.id}>
       <div>{props.note.title}</div>
       <div>{props.note.text}</div>
+      <button onClick={() => props.deleteNoteHandler(props.note.id)}>delete</button>
     </div>
   )
 }

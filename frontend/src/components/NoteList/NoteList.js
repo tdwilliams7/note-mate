@@ -9,11 +9,15 @@ class NoteList extends Component {
     this.props.getNotes();
   }
 
+  deleteNoteHandler = id => {
+    console.log(id);
+  }
+
   render() {
     return (
       <div>
         <h1>Note List Component</h1>
-        {this.props.notes.map(note => <Note note={note} />)}
+        {this.props.notes.map(note => <Note note={note} deleteNoteHandler={this.deleteNoteHandler} />)}
       </div>
     )
   }
