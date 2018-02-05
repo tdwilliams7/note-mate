@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 const port = 8080;
-let notes = ['hello, troy', 'hi, computer'];
+let notes = [{title: 'hello, troy', text: 'hi', id: 0}, {title: 'hello, calculator', text: 'bawk, bawk', id: 1}];
 
 app.use(bodyParser.json());
 app.use(cors());
