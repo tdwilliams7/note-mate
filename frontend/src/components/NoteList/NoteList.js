@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getNotes } from '../../store/actions/actions';
+import { getNotes, deleteNote } from '../../store/actions/actions';
 import Note from '../Note/Note';
 
 class NoteList extends Component {
@@ -11,6 +11,8 @@ class NoteList extends Component {
 
   deleteNoteHandler = id => {
     console.log(id);
+    this.props.deleteNote(id);
+
   }
 
   render() {
@@ -30,4 +32,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { getNotes })(NoteList);
+export default connect(mapStateToProps, { getNotes, deleteNote })(NoteList);

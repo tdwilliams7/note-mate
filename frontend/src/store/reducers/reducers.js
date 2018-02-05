@@ -2,15 +2,19 @@ import {
   GETTING_NOTES,
   RECEIVED_NOTES,
   ADDING_NOTE,
-  NOTE_ADDED
+  NOTE_ADDED,
+  DELETING_NOTE,
+  NOTE_DELETED
 } from "../actions/actions";
 
 const initialState = {
   notes: [],
   gettingNotes: false,
   receivedNote: false,
-  addingItem: false,
-  addedItem: false
+  addingNote: false,
+  addedNote: false,
+  deletingNote: false,
+  deletedNote: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -23,7 +27,10 @@ export const reducer = (state = initialState, action) => {
       return { ...state, addingItem: true };
     case NOTE_ADDED:
       return { ...state, addingItem: false, notes: action.payload };
-    default:
+    case DELETING_NOTE:
+      return { ...state, deletingNote: true };
+    case NOTE_DELETED:
+      return { ...state, deletingNote: false, notes: action.payload };    default:
       return state;
   }
 };

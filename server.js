@@ -23,6 +23,17 @@ app.post('/notes', (req, res) => {
   res.send(notes);
 })
 
+app.delete('/notes', (req, res) => {
+  const targetId = req.body.id;
+  const newNotes = notes.filter(note => {
+    if (note.id !== targetId) {
+      return note;
+    }
+  });
+  notes = newNotes;
+  res.send(notes);
+})
+
 app.listen(port, (req, res) => {
   console.log("listening on port: " + port)
 });

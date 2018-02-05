@@ -3,9 +3,12 @@ export const GETTING_NOTES = 'GETTING_NOTES';
 export const RECEIVED_NOTES = 'RECEIVED_NOTES';
 export const ADDING_NOTE = 'ADDING_NOTE';
 export const NOTE_ADDED = 'NOTE_ADDED';
+export const DELETING_NOTE = 'DELETING_NOTE';
+export const NOTE_DELETED = 'NOTE_DELETED';
 
 const getUrl = 'http://localhost:8080/notes';
 const postUrl = 'http://localhost:8080/notes';
+const deleteUrl = 'http://localhost:8080/notes';
 
 export const getNotes = () => {
   return dispatch => {
@@ -26,6 +29,19 @@ export const addNote = newNote => {
     axios.post(postUrl, newNote)
       .then(({ data }) => {
         dispatch({ type: NOTE_ADDED, payload: data })
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+}
+
+export const deleteNote = id => {
+  return dispatch => {
+    dispatch({ type: DELETING_NOTE });
+    axios.delete(deleteUrl, { data: { id: id }})
+      .then(({ data }) => {
+        dispatch({ type: NOTE_DELETED, payload: data })
       })
       .catch(err => {
         console.log(err);
