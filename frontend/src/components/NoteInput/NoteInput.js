@@ -27,7 +27,6 @@ class NoteInput extends Component {
   render() {
     return (
       <div>
-        <h1>Note Input Component</h1>
         <form onSubmit={this.submitHandler}>
           <label htmlFor="title">Title</label>
           <input onChange={this.inputChangeHandler} name="title" id="title" />
