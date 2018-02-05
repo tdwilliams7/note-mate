@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addNote } from '../../store/actions/actions';
 
 class NoteInput extends Component {
   state = {
@@ -14,6 +16,11 @@ class NoteInput extends Component {
 
   submitHandler = event => {
     event.preventDefault();
+    this.props.addNote(this.state);
+    this.setState({
+      title: '',
+      text: '',
+    })
   }
 
   render() {
@@ -21,10 +28,10 @@ class NoteInput extends Component {
       <div>
         <h1>Note Input Component</h1>
         <form onSubmit={this.submitHandler}>
-          <label for="title">Title</label>
+          <label htmlFor="title">Title</label>
           <input onChange={this.inputChangeHandler}name="title" id="title"></input>
 
-          <label for="text">Text</label>
+          <label htmlFor="text">Text</label>
           <input onChange={this.inputChangeHandler}name="text" id="text"></input>
 
           <button>add</button>
@@ -35,4 +42,4 @@ class NoteInput extends Component {
   }
 }
 
-export default NoteInput;
+export default connect(null, { addNote })(NoteInput);
