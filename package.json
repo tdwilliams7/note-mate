@@ -1,0 +1,27 @@
+{
+  "name": "note-mate",
+  "version": "1.0.0",
+  "description": "Note project. lambda week 8",
+  "main": "server.js",
+  "proxy": "http://localhost:8080",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdwilliams7/note-mate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tdwilliams7/note-mate/issues"
+  },
+  "homepage": "https://github.com/tdwilliams7/note-mate#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "nodemon": "^1.14.12"
+  }
+}
