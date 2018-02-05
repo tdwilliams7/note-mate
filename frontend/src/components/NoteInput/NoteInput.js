@@ -29,10 +29,10 @@ class NoteInput extends Component {
       <div>
         <form onSubmit={this.submitHandler}>
           <label htmlFor="title">Title</label>
-          <input onChange={this.inputChangeHandler} name="title" id="title" />
+          <input onChange={this.inputChangeHandler} name="title" id="title" value={this.state.title}/>
 
           <label htmlFor="text">Text</label>
-          <input onChange={this.inputChangeHandler} name="text" id="text" />
+          <input onChange={this.inputChangeHandler} name="text" id="text" value={this.state.text}/>
 
           <button>add</button>
         </form>
