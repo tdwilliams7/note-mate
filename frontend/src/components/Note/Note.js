@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSingleNote } from '../../store/actions/actions';
+import { getSingleNote, deleteNote } from '../../store/actions/actions';
+import { browserHistory } from 'react-router-dom';
 import axios from 'axios';
 
 class Note extends Component {
-  state = {
-    note: null,
-  }
+
 
   componentDidMount() {
     const id = this.props.match.params.id;
@@ -14,13 +13,22 @@ class Note extends Component {
     console.log(this.props)
   }
 
+  deleteNoteHandler = (id, history) => {
+    console.log(id);
+    this.props.deleteNote(id);
+    this.props.history.push('/notes');
+  }
   render(){
     return (
       <div>
         <h1>Note Component</h1>
-        {/* <div>{this.props}</div> */}
         {this.props.notes.map(note => {
-          return <div>{note.title}</div>
+          return (
+            <div>
+              {note.title}
+              <button onClick={() => this.deleteNoteHandler(note.id)}>Delete</button>
+            </div>
+          )
         })}
       </div>
 
@@ -34,4 +42,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getSingleNote })(Note);
+export default connect(mapStateToProps, { getSingleNote, deleteNote })(Note);

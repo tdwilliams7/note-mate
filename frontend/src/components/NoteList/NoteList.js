@@ -10,18 +10,12 @@ class NoteList extends Component {
     this.props.getNotes();
   }
 
-  deleteNoteHandler = id => {
-    console.log(id);
-    this.props.deleteNote(id);
-
-  }
-
   render() {
     return (
       <div>
         <h1>Note List Component</h1>
         <NoteInput />
-        {this.props.notes.map(note => <NoteCard note={note} deleteNoteHandler={this.deleteNoteHandler} />)}
+        {this.props.notes.map(note => <NoteCard note={note} />)}
       </div>
     )
   }
