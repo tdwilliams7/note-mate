@@ -3,8 +3,7 @@ import React, { Component } from "react";
 class Checklist extends Component {
   state = {
     todos: [],
-    newTodo: "",
-    id: 0
+    newTodo: ""
   };
 
   inputChangeHandler = ({ target }) => {
@@ -17,16 +16,30 @@ class Checklist extends Component {
     event.preventDefault();
     const newTodo = this.state.newTodo;
     let todos = this.state.todos.slice(0);
-    let id = this.state.id;
-    todos = [...todos, { text: newTodo, completed: false, id: this.state.id }];
+    let id = this.state.todos.length;
+    todos = [...todos, { text: newTodo, completed: false, id }];
+
     this.setState({
       todos,
-      newTodo: "",
-      id: id++
+      newTodo: ""
     });
   };
 
-  toggleCompleteHandler = id => {};
+  toggleCompleteHandler = id => {
+    let todos = this.state.todos.slice(0);
+    let newTodos = todos.map(todo => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed;
+        return todo;
+      }
+      return todo;
+    });
+    todos = newTodos;
+    this.setState({
+      todos,
+      ...this.state
+    });
+  };
 
   render() {
     return (
@@ -34,7 +47,14 @@ class Checklist extends Component {
         <h1>Checklist Component</h1>
         <ul>
           {this.state.todos.map(todo => {
-            return <li onClick={this.toggleCompleteHandler()}>{todo.text}</li>;
+            return (
+              <li
+                key={todo.id}
+                onClick={() => this.toggleCompleteHandler(todo.id)}
+              >
+                {todo.text}
+              </li>
+            );
           })}
         </ul>
         <form onSubmit={this.addTodoHandler}>
