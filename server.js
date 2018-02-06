@@ -16,6 +16,13 @@ app.get('/notes', (req, res) => {
   res.send(notes)
 });
 
+app.get('/note/:id', (req, res) => {
+  const noteId = req.params.id;
+  console.log(noteId)
+  note = notes.filter(note => note.id.toString() === noteId);
+  res.send(note);
+})
+
 app.post('/notes', (req, res) => {
   const newNote = req.body;
   notes.push({...newNote, id: id});

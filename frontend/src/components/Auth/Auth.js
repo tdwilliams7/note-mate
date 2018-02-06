@@ -4,10 +4,18 @@ import { Link, Redirect } from 'react-router-dom';
 class Auth extends Component {
   state = {
     authenticated: false,
+    username: '',
+    password: '',
   }
-  checkAuthorization = (event) => {
-    event.preventDefault();
-    let flag = false;
+
+  inputChangeHandler = ({ target }) => {
+    this.setState({
+      [target.name]: target.value
+    });
+  };
+
+  checkAuthorization = (e) => {
+    e.preventDefault();
     if (this.state.username.length > 4 && this.state.password.length > 4) {
       this.setState({
         authenticated: true,
@@ -24,16 +32,14 @@ class Auth extends Component {
     return (
       <div>
         <h1>Auth component</h1>
-        <form>
+        <form onSubmit={this.checkAuthorization}>
           <div>
-            <input placeholder='user name'></input>
+            <input onChange={this.inputChangeHandler} placeholder='user name'  value={this.state.username}  name="username"></input>
           </div>
           <div>
-            <input placeholder='password'></input>
+            <input onChange={this.inputChangeHandler} placeholder='password' value={this.state.password} name="password"></input>
           </div>
-          <Link to={"/notes"}>
-            <button >Log In</button>
-          </Link>
+          <button >Log In</button>
         </form>
       </div>
     )

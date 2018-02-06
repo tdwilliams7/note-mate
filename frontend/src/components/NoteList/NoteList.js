@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getNotes, deleteNote } from '../../store/actions/actions';
-import Note from '../Note/Note';
+import NoteCard from '../NoteCard/NoteCard';
 import NoteInput from '../NoteInput/NoteInput';
 
 class NoteList extends Component {
@@ -21,7 +21,7 @@ class NoteList extends Component {
       <div>
         <h1>Note List Component</h1>
         <NoteInput />
-        {this.props.notes.map(note => <Note note={note} deleteNoteHandler={this.deleteNoteHandler} />)}
+        {this.props.notes.map(note => <NoteCard note={note} deleteNoteHandler={this.deleteNoteHandler} />)}
       </div>
     )
   }

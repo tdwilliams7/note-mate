@@ -48,3 +48,16 @@ export const deleteNote = id => {
       })
   }
 }
+
+export const getSingleNote = (id) => {
+  const url = `http://localhost:8080/note/${id}`
+  return dispatch => {
+    axios.get(url)
+      .then(({ data }) => {
+        dispatch({ type: RECEIVED_NOTES, payload: data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+}

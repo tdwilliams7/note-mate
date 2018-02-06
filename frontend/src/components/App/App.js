@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // components
 import NoteList from '../NoteList/NoteList';
 import NoteInput from '../NoteInput/NoteInput';
+import Note from '../Note/Note';
 import Auth from '../Auth/Auth';
 
 
@@ -19,8 +20,9 @@ class App extends Component {
         </header>
         <Router>
           <Switch>
-            <Route exact path='/' component={Auth} />
+            <Route path='/note/:id' component={Note} />
             <Route path='/notes' component={NoteList} />
+            <Route exact path='/' component={Auth} />
           </Switch>
         </Router>
       </div>
