@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // components
-import NoteList from '../NoteList/NoteList';
-import NoteInput from '../NoteInput/NoteInput';
-import Note from '../Note/Note';
-import Auth from '../Auth/Auth';
+import NoteList from "../NoteList/NoteList";
+import Note from "../Note/Note";
+import Auth from "../Auth/Auth";
 
-
-import './App.css';
+import "./App.css";
 
 class App extends Component {
   render() {
@@ -20,9 +17,9 @@ class App extends Component {
         </header>
         <Router>
           <Switch>
-            <Route path='/note/:id' component={Note} />
-            <Route path='/notes' component={NoteList} />
-            <Route exact path='/' component={Auth} />
+            <Route path="/note/:id" component={Note} />
+            <Route path="/notes" component={NoteList} />
+            <Route exact path="/" component={Auth} />
           </Switch>
         </Router>
       </div>
