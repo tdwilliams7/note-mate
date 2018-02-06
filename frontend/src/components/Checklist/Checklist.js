@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Checklist.css";
 
 class Checklist extends Component {
   state = {
@@ -18,7 +19,6 @@ class Checklist extends Component {
     let todos = this.state.todos.slice(0);
     let id = this.state.todos.length;
     todos = [...todos, { text: newTodo, completed: false, id }];
-
     this.setState({
       todos,
       newTodo: ""
@@ -47,8 +47,11 @@ class Checklist extends Component {
         <h1>Checklist Component</h1>
         <ul>
           {this.state.todos.map(todo => {
+            let style = "todo";
+            if (todo.completed) style = "todo--completed";
             return (
               <li
+                className={style}
                 key={todo.id}
                 onClick={() => this.toggleCompleteHandler(todo.id)}
               >
