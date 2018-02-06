@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getNotes, deleteNote } from '../../store/actions/actions';
-import NoteCard from '../NoteCard/NoteCard';
+//import NoteCard from '../NoteCard/NoteCard';
 import NoteInput from '../NoteInput/NoteInput';
 
 class NoteList extends Component {
@@ -19,6 +20,16 @@ class NoteList extends Component {
       </div>
     )
   }
+}
+
+const NoteCard = props => {
+  return (
+    <div key={props.note.id}>
+      <Link to={`/note/${props.note.id}`}>
+        <div>{props.note.title}</div>
+      </Link>
+    </div>
+  )
 }
 
 const mapStateToProps = state => {

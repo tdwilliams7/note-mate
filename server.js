@@ -18,7 +18,6 @@ app.get('/notes', (req, res) => {
 
 app.get('/note/:id', (req, res) => {
   const noteId = req.params.id;
-  console.log(noteId)
   note = notes.filter(note => note.id.toString() === noteId);
   res.send(note);
 })
@@ -39,6 +38,20 @@ app.delete('/notes', (req, res) => {
   });
   notes = newNotes;
   res.send(notes);
+})
+
+app.put('/note/:id', (req, res) => {
+  const note = req.body.data.note;
+  const { title, text, id } = note;
+  let newNotes = notes.map(note => {
+    if (note.id === Number(id)) {
+      return { ...note, title, text,}
+    }
+    return note;
+  })
+  console.log("New notes: ",newNotes)
+  notes = newNotes;
+  res.send(notes)
 })
 
 app.listen(port, (req, res) => {
