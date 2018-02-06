@@ -7,6 +7,12 @@ class Checklist extends Component {
     newTodo: ""
   };
 
+  // componentDidMount() {
+  //   const id = this.props.routeId;
+  //   console.log(id);
+  //   this.props.getSingleNote(id);
+  // }
+
   inputChangeHandler = ({ target }) => {
     this.setState({
       [target.name]: target.value

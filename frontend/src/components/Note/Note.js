@@ -11,7 +11,9 @@ class Note extends Component {
   state = {
     title: "",
     text: "",
-    id: ""
+    id: "",
+    newTodo: "",
+    checklist: []
   };
 
   componentDidMount() {
@@ -22,7 +24,8 @@ class Note extends Component {
         return this.setState({
           title: note.title,
           text: note.text,
-          id
+          id,
+          checklist: note.checklist
         });
       }
       return note;
@@ -48,6 +51,31 @@ class Note extends Component {
     });
   };
 
+  addTodoHandler = event => {
+    event.preventDefault();
+    const newTodo = { text: this.state.newTodo, completed: false };
+    let todoList = this.state.checklist.slice(0);
+    let checklist = [newTodo];
+    console.log("Checklist state: ", this.state.checklist);
+    this.setState({
+      checklist: [newTodo],
+      ...this.state
+    });
+    console.log("checklist: ", checklist);
+    // const note = this.state;
+    // this.props.updateNote(note);
+    console.log("Updated state: ", this.state);
+    // this.setState({
+    //   ...this.state,
+    //   newTodo: "",
+    //   checklist: []
+    // });
+  };
+
+  toggleCompleteHandler = id => {
+    console.log(id);
+  };
+
   render() {
     return (
       <div>
@@ -59,7 +87,15 @@ class Note extends Component {
               <button onClick={() => this.deleteNoteHandler(note.id)}>
                 Delete
               </button>
-              <Checklist />
+              <Checklist
+                checklist={note.checklist}
+                routeId={this.props.match.params.id}
+                getSingleNote={this.props.getSingleNote}
+                // inputChangeHandler={this.inputChangeHandler}
+                // addTodoHandler={this.addTodoHandler}
+                // newTodo={this.state.newTodo}
+                // toggleCompleteHandler={this.toggleCompleteHandler}
+              />
             </div>
           );
         })}

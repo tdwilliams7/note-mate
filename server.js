@@ -6,8 +6,18 @@ const cors = require("cors");
 const app = express();
 const port = 8080;
 let notes = [
-  { title: "hello, troy", text: "hi", id: 0 },
-  { title: "hello, calculator", text: "bawk, bawk", id: 1 }
+  {
+    title: "hello, troy",
+    text: "hi",
+    id: 0,
+    checklist: [{ text: "IODK something else", completed: false, id: 0 }]
+  },
+  {
+    title: "hello, calculator",
+    text: "bawk, bawk",
+    id: 1,
+    checklist: [{ text: "finish this", completed: false, id: 0 }]
+  }
 ];
 let id = 2;
 
@@ -44,14 +54,14 @@ app.delete("/notes", (req, res) => {
 
 app.put("/note/:id", (req, res) => {
   const note = req.body.data.note;
-  const { title, text, id } = note;
+  const { title, text, id, checklist } = note;
+  console.log("New note sent from Update: ", note);
   let newNotes = notes.map(note => {
     if (note.id === Number(id)) {
-      return { ...note, title, text };
+      return { ...note, title, text, checklist };
     }
     return note;
   });
-  console.log("New notes: ", newNotes);
   notes = newNotes;
   res.send(notes);
 });
