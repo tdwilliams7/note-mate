@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getNotes, deleteNote } from '../../store/actions/actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getNotes, deleteNote } from "../../store/actions/actions";
 //import NoteCard from '../NoteCard/NoteCard';
-import NoteInput from '../NoteInput/NoteInput';
+import NoteInput from "../NoteInput/NoteInput";
 
 class NoteList extends Component {
-
   componentDidMount() {
     this.props.getNotes();
   }
@@ -16,9 +15,9 @@ class NoteList extends Component {
       <div>
         <h1>Note List Component</h1>
         <NoteInput />
-        {this.props.notes.map(note => <NoteCard note={note} />)}
+        {this.props.notes.map(note => <NoteCard key={note.id} note={note} />)}
       </div>
-    )
+    );
   }
 }
 
@@ -29,14 +28,13 @@ const NoteCard = props => {
         <div>{props.note.title}</div>
       </Link>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = state => {
   return {
-    notes: state.notes,
-  }
-}
-
+    notes: state.notes
+  };
+};
 
 export default connect(mapStateToProps, { getNotes, deleteNote })(NoteList);
