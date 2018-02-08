@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getNotes, deleteNote } from "../../store/actions/actions";
-//import NoteCard from '../NoteCard/NoteCard';
 import NoteInput from "../NoteInput/NoteInput";
+import { Card, CardText, CardBody, CardTitle, Button } from "reactstrap";
 import "./NoteList.css";
 
 class NoteList extends Component {
@@ -25,11 +25,14 @@ class NoteList extends Component {
 
 const NoteCard = props => {
   return (
-    <div className="NoteCard" key={props.note.id}>
-      <Link to={`/note/${props.note.id}`}>
-        <div>{props.note.title}</div>
-      </Link>
-    </div>
+    <Card className="NoteCard" key={props.note.id}>
+      <CardBody>
+        <CardTitle>{props.note.title}</CardTitle>
+        <Link to={`/note/${props.note.id}`}>
+          <Button>...</Button>
+        </Link>
+      </CardBody>
+    </Card>
   );
 };
 

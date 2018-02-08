@@ -1,4 +1,26 @@
 .NoteList {
   display: flex;
   justify-content: space-around;
+  flex-flow: row wrap;
+}
+.NoteList .NoteCard {
+  min-width: 30vw;
+  min-height: 75px;
+  box-shadow: 5px 5px #27566b;
+  margin-bottom: 10px;
+}
+.NoteList .NoteCard .card-body .card-title {
+  color: #aa8a39;
+}
+.NoteList .NoteCard .card-body a .btn {
+  background: #27566b;
+  color: white;
+}
+.NoteList .NoteCard .card-body:hover {
+  card-title: white;
+  background: #27566b;
+}
+.NoteList .NoteCard .card-body:hover a .btn {
+  background: white;
+  color: #27566b;
 }
