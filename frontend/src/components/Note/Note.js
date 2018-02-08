@@ -6,6 +6,7 @@ import {
   deleteNote,
   updateNote
 } from "../../store/actions/actions";
+import "./Note.css";
 
 class Note extends Component {
   state = {
@@ -51,37 +52,12 @@ class Note extends Component {
     });
   };
 
-  addTodoHandler = event => {
-    event.preventDefault();
-    const newTodo = { text: this.state.newTodo, completed: false };
-    let todoList = this.state.checklist.slice(0);
-    let checklist = [newTodo];
-    console.log("Checklist state: ", this.state.checklist);
-    this.setState({
-      checklist: [newTodo],
-      ...this.state
-    });
-    console.log("checklist: ", checklist);
-    // const note = this.state;
-    // this.props.updateNote(note);
-    console.log("Updated state: ", this.state);
-    // this.setState({
-    //   ...this.state,
-    //   newTodo: "",
-    //   checklist: []
-    // });
-  };
-
-  toggleCompleteHandler = id => {
-    console.log(id);
-  };
-
   render() {
     return (
       <div>
         {this.props.notes.map(note => {
           return (
-            <div key={note.id}>
+            <div key={note.id} className="Note">
               <h2>{this.state.title}</h2>
               <div>{this.state.text}</div>
               <button onClick={() => this.deleteNoteHandler(note.id)}>

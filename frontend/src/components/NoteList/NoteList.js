@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getNotes, deleteNote } from "../../store/actions/actions";
 //import NoteCard from '../NoteCard/NoteCard';
 import NoteInput from "../NoteInput/NoteInput";
+import "./NoteList.css";
 
 class NoteList extends Component {
   componentDidMount() {
@@ -13,9 +14,10 @@ class NoteList extends Component {
   render() {
     return (
       <div>
-        <h1>Note List Component</h1>
         <NoteInput />
-        {this.props.notes.map(note => <NoteCard key={note.id} note={note} />)}
+        <div className="NoteList">
+          {this.props.notes.map(note => <NoteCard key={note.id} note={note} />)}
+        </div>
       </div>
     );
   }
@@ -23,7 +25,7 @@ class NoteList extends Component {
 
 const NoteCard = props => {
   return (
-    <div key={props.note.id}>
+    <div className="NoteCard" key={props.note.id}>
       <Link to={`/note/${props.note.id}`}>
         <div>{props.note.title}</div>
       </Link>

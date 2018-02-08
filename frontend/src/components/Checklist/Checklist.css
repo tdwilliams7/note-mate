@@ -3,4 +3,5 @@ ul {
 }
 ul .todo--completed {
   text-decoration: line-through;
+  color: gray;
 }
