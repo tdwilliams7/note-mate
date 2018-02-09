@@ -7,8 +7,8 @@ const app = express();
 const port = 8080;
 let notes = [
   {
-    title: "hello, troy",
-    text: "hi",
+    title: "Don't Panic",
+    text: "On no account should you allow a Vogon to read poetry to you",
     id: 0,
     rank: 2,
     createdOn: 1518135181100,
@@ -16,7 +16,8 @@ let notes = [
   },
   {
     title: "hello, calculator",
-    text: "bawk, bawk",
+    text:
+      "What to do if you find yourself stuck with no hope of rescue: Consider yourself lucky that life has been good to you so far. ",
     id: 1,
     rank: 5,
     createdOn: 1518132281256,

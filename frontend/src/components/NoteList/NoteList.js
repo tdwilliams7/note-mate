@@ -60,16 +60,15 @@ class NoteList extends Component {
 const NoteCard = props => {
   return (
     <Card className="NoteCard" key={props.note.id}>
+      <CardTitle>{props.note.title}</CardTitle>
       <CardBody>
-        <CardTitle>
-          {props.note.title} {props.note.rank}
-        </CardTitle>
         <div>
-          <p>{`${props.note.text.substring(0, 10)}`}</p>
+          <p>{`${props.note.text.substring(0, 10)}...`}</p>
           <p>{Moment(props.note.createdOn).fromNow()}</p>
           <Link to={`/note/${props.note.id}`}>
             <Button>...</Button>
           </Link>
+          <span>{props.note.rank}</span>
         </div>
       </CardBody>
     </Card>

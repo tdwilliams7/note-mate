@@ -6,6 +6,7 @@ import {
   deleteNote,
   updateNote
 } from "../../store/actions/actions";
+import { Row, Col, Button, Input } from "reactstrap";
 import "./Note.css";
 
 class Note extends Component {
@@ -26,7 +27,8 @@ class Note extends Component {
           title: note.title,
           text: note.text,
           id,
-          checklist: note.checklist
+          checklist: note.checklist,
+          rank: note.rank
         });
       }
       return note;
@@ -57,38 +59,61 @@ class Note extends Component {
       <div>
         {this.props.notes.map(note => {
           return (
-            <div key={note.id} className="Note">
-              <h2>{this.state.title}</h2>
-              <div>{this.state.text}</div>
-              <button onClick={() => this.deleteNoteHandler(note.id)}>
-                Delete
-              </button>
-              <Checklist
-                checklist={note.checklist}
-                routeId={this.props.match.params.id}
-                getSingleNote={this.props.getSingleNote}
-                // inputChangeHandler={this.inputChangeHandler}
-                // addTodoHandler={this.addTodoHandler}
-                // newTodo={this.state.newTodo}
-                // toggleCompleteHandler={this.toggleCompleteHandler}
-              />
-            </div>
+            <Row>
+              <Col md="3">
+                <form onSubmit={this.updateNoteHandler}>
+                  <Input
+                    onChange={this.inputChangeHandler}
+                    value={this.state.title}
+                    name="title"
+                  />
+                  <Input
+                    type="textarea"
+                    onChange={this.inputChangeHandler}
+                    value={this.state.text}
+                    name="text"
+                  />
+                  <div>
+                    <Input
+                      type="select"
+                      onChange={this.inputChangeHandler}
+                      value={this.state.rank}
+                      name="rank"
+                    >
+                      <option>5</option>
+                      <option>4</option>
+                      <option>3</option>
+                      <option>2</option>
+                      <option>1</option>
+                    </Input>
+                  </div>
+                  <button>update</button>
+                </form>
+              </Col>
+              <Col md="6">
+                <div key={note.id} className="Note">
+                  <h2>{this.state.title}</h2>
+                  <div>{this.state.text}</div>
+                  <div>{this.state.rank}</div>
+                  <button onClick={() => this.deleteNoteHandler(note.id)}>
+                    Delete
+                  </button>
+                </div>
+              </Col>
+              <Col>
+                <Checklist
+                  checklist={note.checklist}
+                  routeId={this.props.match.params.id}
+                  getSingleNote={this.props.getSingleNote}
+                  // inputChangeHandler={this.inputChangeHandler}
+                  // addTodoHandler={this.addTodoHandler}
+                  // newTodo={this.state.newTodo}
+                  // toggleCompleteHandler={this.toggleCompleteHandler}
+                />
+              </Col>
+            </Row>
           );
         })}
-
-        <form onSubmit={this.updateNoteHandler}>
-          <input
-            onChange={this.inputChangeHandler}
-            value={this.state.title}
-            name="title"
-          />
-          <input
-            onChange={this.inputChangeHandler}
-            value={this.state.text}
-            name="text"
-          />
-          <button>update</button>
-        </form>
       </div>
     );
   }

@@ -9,6 +9,15 @@
   box-shadow: 5px 5px #27566b;
   margin-bottom: 10px;
 }
+.NoteList .NoteCard:hover {
+  background: #467386;
+}
+.NoteList .NoteCard:hover .card-title {
+  color: #aa8a39;
+}
+.NoteList .NoteCard:hover .card-body a .btn {
+  background: #aa4f39;
+}
 .NoteList .NoteCard .card-body .card-title {
   color: #aa8a39;
 }
@@ -16,11 +25,6 @@
   background: #27566b;
   color: white;
 }
-.NoteList .NoteCard .card-body:hover {
-  card-title: white;
-  background: #27566b;
-}
-.NoteList .NoteCard .card-body:hover a .btn {
-  background: white;
-  color: #27566b;
+.NoteList .NoteCard .card-body span {
+  margin-left: 20px;
 }
