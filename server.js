@@ -10,16 +10,21 @@ let notes = [
     title: "hello, troy",
     text: "hi",
     id: 0,
+    rank: 2,
+    createdOn: 1518135181100,
     checklist: [{ text: "IODK something else", completed: false, id: 0 }]
   },
   {
     title: "hello, calculator",
     text: "bawk, bawk",
     id: 1,
+    rank: 5,
+    createdOn: 1518132281256,
     checklist: [{ text: "finish this", completed: false, id: 0 }]
   }
 ];
 let id = 2;
+let date = Date.now();
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -36,7 +41,7 @@ app.get("/note/:id", (req, res) => {
 
 app.post("/notes", (req, res) => {
   const newNote = req.body;
-  notes.push({ ...newNote, id: id });
+  notes.push({ ...newNote, id: id, createdOn: date });
   id++;
   res.send(notes);
 });
@@ -54,11 +59,11 @@ app.delete("/notes", (req, res) => {
 
 app.put("/note/:id", (req, res) => {
   const note = req.body.data.note;
-  const { title, text, id, checklist } = note;
+  const { title, text, id, checklist, rank } = note;
   console.log("New note sent from Update: ", note);
   let newNotes = notes.map(note => {
     if (note.id === Number(id)) {
-      return { ...note, title, text, checklist };
+      return { ...note, title, text, checklist, rank };
     }
     return note;
   });

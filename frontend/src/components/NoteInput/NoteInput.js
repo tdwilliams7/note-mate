@@ -6,7 +6,8 @@ class NoteInput extends Component {
   state = {
     title: "",
     text: "",
-    checklist: []
+    checklist: [],
+    rank: 5
   };
 
   inputChangeHandler = ({ target }) => {
@@ -21,6 +22,7 @@ class NoteInput extends Component {
     this.setState({
       title: "",
       text: "",
+      rank: 5,
       checklist: []
     });
   };
@@ -44,6 +46,17 @@ class NoteInput extends Component {
             id="text"
             value={this.state.text}
           />
+          <select
+            onChange={this.inputChangeHandler}
+            value={this.state.rank}
+            name="rank"
+          >
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+          </select>
 
           <button>add</button>
         </form>
