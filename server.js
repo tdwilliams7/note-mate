@@ -12,7 +12,7 @@ let notes = [
     id: 0,
     rank: 2,
     createdOn: 1518135181100,
-    tag: "work",
+    tag: "Work",
     checklist: [{ text: "IODK something else", completed: false, id: 0 }]
   },
   {
@@ -22,7 +22,7 @@ let notes = [
     id: 1,
     rank: 5,
     createdOn: 1518132281256,
-    tag: "home",
+    tag: "Home",
     checklist: [{ text: "finish this", completed: false, id: 0 }]
   }
 ];

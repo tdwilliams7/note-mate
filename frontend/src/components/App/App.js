@@ -79,22 +79,10 @@ class App extends Component {
             <Button onClick={this.signOutHandler}>Sign out</Button>
           </header>
           <Router>
-            <Switch>
-              <Route path="/note/:id" component={Note} />
+            <div>
               <Route path="/notes" component={NoteList} />
-              <Route
-                exact
-                path="/"
-                render={() => (
-                  <Auth
-                    state={this.state}
-                    addNewUser={this.addNewUser}
-                    checkAuthorization={this.checkAuthorization}
-                    inputChangeHandler={this.inputChangeHandler}
-                  />
-                )}
-              />
-            </Switch>
+              <Route path="/note/:id" component={Note} />
+            </div>
           </Router>
         </Container>
       </div>

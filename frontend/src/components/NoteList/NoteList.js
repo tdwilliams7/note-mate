@@ -3,13 +3,20 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getNotes, deleteNote } from "../../store/actions/actions";
 import NoteInput from "../NoteInput/NoteInput";
-import { Card, CardBody, CardTitle, Button, Row, Col } from "reactstrap";
+import { Card, CardBody, CardTitle, Button, Row, Col, Input } from "reactstrap";
 import Moment from "moment";
 import "./NoteList.css";
 
 class NoteList extends Component {
+  // consstructor(props) {
+  //   super(props);
+  //   this.
+  // }
   state = {
-    notes: []
+    notes: [],
+    tag: "",
+    searchText: "",
+    filtered: false
   };
 
   componentDidMount() {
@@ -18,6 +25,12 @@ class NoteList extends Component {
       notes: this.props.notes
     });
   }
+
+  inputChangeHandler = ({ target }) => {
+    this.setState({
+      [target.name]: target.value
+    });
+  };
 
   sortHighLow = () => {
     const notes = this.props.notes.sort((a, b) => {
@@ -37,6 +50,35 @@ class NoteList extends Component {
     });
   };
 
+  searchByTag = () => {
+    const target = this.state.tag.toString();
+    const notes = this.props.notes.filter(note => {
+      if (note.tag === target) {
+        return note;
+      }
+      return undefined;
+    });
+    console.log("filtered notes: ", notes);
+    this.setState({
+      notes,
+      filtered: true
+    });
+    console.log("Prop Notes: ", this.props.notes);
+  };
+
+  searchByText = () => {
+    const target = this.state.searchText.toLowerCase();
+    const newLength = target.length;
+    const notes = this.props.notes.filter(note => {
+      //cosnt;
+      if (note.title.substring(0, newLength) === target) {
+        return note;
+      }
+      return undefined;
+    });
+    this.setState({});
+  };
+
   render() {
     return (
       <Row>
@@ -46,10 +88,25 @@ class NoteList extends Component {
         <Col xs="9">
           <Button onClick={this.sortLowHigh}>Sort low to high</Button>
           <Button onClick={this.sortHighLow}>Sort High to low</Button>
+          <div>
+            <label htmlFor="tagSearch">Search by tag</label>
+            <Input type="select" name="tag" onChange={this.inputChangeHandler}>
+              <option defaultValue>Work</option>
+              <option>Random</option>
+              <option>School</option>
+              <option>Home</option>
+            </Input>
+            <Button onClick={this.searchByTag}>Search</Button>
+          </div>
+
           <div className="NoteList">
-            {this.props.notes.map(note => (
-              <NoteCard key={note.id} note={note} />
-            ))}
+            {this.state.filtered
+              ? this.state.notes.map(note => (
+                  <NoteCard key={note.id} note={note} />
+                ))
+              : this.props.notes.map(note => (
+                  <NoteCard key={note.id} note={note} />
+                ))}
           </div>
         </Col>
       </Row>
