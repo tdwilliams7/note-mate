@@ -7,7 +7,8 @@ class NoteInput extends Component {
     title: "",
     text: "",
     checklist: [],
-    rank: 5
+    rank: 5,
+    tag: ""
   };
 
   inputChangeHandler = ({ target }) => {
@@ -19,10 +20,12 @@ class NoteInput extends Component {
   submitHandler = event => {
     event.preventDefault();
     this.props.addNote(this.state);
+    console.log(this.state);
     this.setState({
       title: "",
       text: "",
       rank: 5,
+      tag: "",
       checklist: []
     });
   };
@@ -56,6 +59,17 @@ class NoteInput extends Component {
             <option>3</option>
             <option>2</option>
             <option>1</option>
+          </select>
+
+          <select
+            onChange={this.inputChangeHandler}
+            value={this.state.tag}
+            name="tag"
+          >
+            <option>Work</option>
+            <option>Random</option>
+            <option>School</option>
+            <option>Home</option>
           </select>
 
           <button>add</button>

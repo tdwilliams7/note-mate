@@ -12,6 +12,7 @@ let notes = [
     id: 0,
     rank: 2,
     createdOn: 1518135181100,
+    tag: "work",
     checklist: [{ text: "IODK something else", completed: false, id: 0 }]
   },
   {
@@ -21,6 +22,7 @@ let notes = [
     id: 1,
     rank: 5,
     createdOn: 1518132281256,
+    tag: "home",
     checklist: [{ text: "finish this", completed: false, id: 0 }]
   }
 ];
@@ -61,7 +63,6 @@ app.delete("/notes", (req, res) => {
 app.put("/note/:id", (req, res) => {
   const note = req.body.data.note;
   const { title, text, id, checklist, rank } = note;
-  console.log("New note sent from Update: ", note);
   let newNotes = notes.map(note => {
     if (note.id === Number(id)) {
       return { ...note, title, text, checklist, rank };

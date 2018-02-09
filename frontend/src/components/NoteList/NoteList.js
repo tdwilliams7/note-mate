@@ -62,6 +62,7 @@ const NoteCard = props => {
     <Card className="NoteCard" key={props.note.id}>
       <CardTitle>{props.note.title}</CardTitle>
       <CardBody>
+        <div>{props.note.tag}</div>
         <div>
           <p>{`${props.note.text.substring(0, 10)}...`}</p>
           <p>{Moment(props.note.createdOn).fromNow()}</p>
