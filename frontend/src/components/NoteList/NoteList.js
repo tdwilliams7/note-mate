@@ -135,7 +135,7 @@ const NoteCard = props => {
 
 const mapStateToProps = state => {
   return {
-    notes: state.notes
+    notes: state.reducer.notes
   };
 };
 

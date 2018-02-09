@@ -57,9 +57,9 @@ class Note extends Component {
   render() {
     return (
       <div>
-        {this.props.notes.map(note => {
+        {this.props.notes.map((note, i) => {
           return (
-            <Row>
+            <Row key={i}>
               <Col md="3">
                 <form onSubmit={this.updateNoteHandler}>
                   <Input
@@ -121,7 +121,7 @@ class Note extends Component {
 
 const mapStateToProps = state => {
   return {
-    notes: state.notes
+    notes: state.reducer.notes
   };
 };
 
