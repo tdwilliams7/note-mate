@@ -1,15 +1,22 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addNote } from "../../store/actions/actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addNote } from '../../store/actions/actions';
 
 class NoteInput extends Component {
   state = {
-    title: "",
-    text: "",
+    title: '',
+    text: '',
     checklist: [],
     rank: 5,
-    tag: ""
+    tag: '',
+    userId: null
   };
+
+  componentDidMount() {
+    this.setState({
+      userId: this.props.user
+    });
+  }
 
   inputChangeHandler = ({ target }) => {
     this.setState({
@@ -22,10 +29,10 @@ class NoteInput extends Component {
     this.props.addNote(this.state);
     console.log(this.state);
     this.setState({
-      title: "",
-      text: "",
-      rank: 5,
-      tag: "",
+      title: '',
+      text: '',
+      rank: '5',
+      tag: '',
       checklist: []
     });
   };
@@ -79,4 +86,10 @@ class NoteInput extends Component {
   }
 }
 
-export default connect(null, { addNote })(NoteInput);
+const mapStateToProps = state => {
+  return {
+    user: state.reducer.user
+  };
+};
+
+export default connect(mapStateToProps, { addNote })(NoteInput);

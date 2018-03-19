@@ -1,21 +1,22 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getNotes, deleteNote } from "../../store/actions/actions";
-import NoteInput from "../NoteInput/NoteInput";
-import { Card, CardBody, CardTitle, Button, Row, Col, Input } from "reactstrap";
-import Moment from "moment";
-import "./NoteList.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import {
+  getNotes,
+  deleteNote,
+  filterByTag,
+  filterByText
+} from '../../store/actions/actions';
+import NoteInput from '../NoteInput/NoteInput';
+import { Card, CardBody, CardTitle, Button, Row, Col, Input } from 'reactstrap';
+import Moment from 'moment';
+import './NoteList.css';
 
 class NoteList extends Component {
-  // consstructor(props) {
-  //   super(props);
-  //   this.
-  // }
   state = {
     notes: [],
-    tag: "",
-    searchText: "",
+    tag: '',
+    searchText: '',
     filtered: false
   };
 
@@ -51,32 +52,13 @@ class NoteList extends Component {
   };
 
   searchByTag = () => {
-    const target = this.state.tag.toString();
-    const notes = this.props.notes.filter(note => {
-      if (note.tag === target) {
-        return note;
-      }
-      return undefined;
-    });
-    console.log("filtered notes: ", notes);
-    this.setState({
-      notes,
-      filtered: true
-    });
-    console.log("Prop Notes: ", this.props.notes);
+    this.props.filterByTag(this.state.tag);
   };
 
-  searchByText = () => {
+  searchByText = event => {
+    event.preventDefault();
     const target = this.state.searchText.toLowerCase();
-    const newLength = target.length;
-    const notes = this.props.notes.filter(note => {
-      //cosnt;
-      if (note.title.substring(0, newLength) === target) {
-        return note;
-      }
-      return undefined;
-    });
-    this.setState({});
+    this.props.filterByText(target);
   };
 
   render() {
@@ -86,6 +68,7 @@ class NoteList extends Component {
           <NoteInput />
         </Col>
         <Col xs="9">
+          <Button onClick={this.props.getNotes}>Get all</Button>
           <Button onClick={this.sortLowHigh}>Sort low to high</Button>
           <Button onClick={this.sortHighLow}>Sort High to low</Button>
           <div>
@@ -98,15 +81,26 @@ class NoteList extends Component {
             </Input>
             <Button onClick={this.searchByTag}>Search</Button>
           </div>
+          <div>
+            <form onSubmit={this.searchByText}>
+              <input
+                value={this.state.searchText}
+                name="searchText"
+                onChange={this.inputChangeHandler}
+              />
+              <button>Search</button>
+            </form>
+            <label>Search by title</label>
+          </div>
 
           <div className="NoteList">
-            {this.state.filtered
-              ? this.state.notes.map(note => (
-                  <NoteCard key={note.id} note={note} />
-                ))
-              : this.props.notes.map(note => (
-                  <NoteCard key={note.id} note={note} />
-                ))}
+            {this.props.notes.length > 0 ? (
+              this.props.notes.map(note => (
+                <NoteCard key={note._id} note={note} />
+              ))
+            ) : (
+              <div>No Notes to display yet</div>
+            )}
           </div>
         </Col>
       </Row>
@@ -121,9 +115,9 @@ const NoteCard = props => {
       <CardBody>
         <div>{props.note.tag}</div>
         <div>
-          <p>{`${props.note.text.substring(0, 10)}...`}</p>
+          <p>{`${props.note.text.substring(0, 25)}...`}</p>
           <p>{Moment(props.note.createdOn).fromNow()}</p>
-          <Link to={`/note/${props.note.id}`}>
+          <Link to={`/notes/${props.note._id}`}>
             <Button>...</Button>
           </Link>
           <span>{props.note.rank}</span>
@@ -139,4 +133,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getNotes, deleteNote })(NoteList);
+export default connect(mapStateToProps, {
+  getNotes,
+  deleteNote,
+  filterByText,
+  filterByTag
+})(NoteList);

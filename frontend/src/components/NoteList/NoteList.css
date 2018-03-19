@@ -3,6 +3,9 @@
   justify-content: space-around;
   flex-flow: row wrap;
 }
+.NoteList .work {
+  background: blue;
+}
 .NoteList .NoteCard {
   min-width: 30vw;
   min-height: 75px;

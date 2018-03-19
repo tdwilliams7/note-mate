@@ -1,22 +1,24 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Button, Container } from "reactstrap";
-
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Button, Container } from 'reactstrap';
+import { addUser, login, signout } from '../../store/actions/actions';
+import { connect } from 'react-redux';
 // components
-import NoteList from "../NoteList/NoteList";
-import Note from "../Note/Note";
-import Auth from "../Auth/Auth";
+import NoteList from '../NoteList/NoteList';
+import Note from '../Note/Note';
+import Auth from '../Auth/Auth';
 
-import "./App.css";
+import './App.css';
 
 class App extends Component {
   state = {
-    authenticated: false,
-    uName: "TroyW",
-    uPass: "Open",
-    username: "",
-    password: "",
-    attempted: false
+    authenticated: '',
+    uName: 'TroyW',
+    uPass: 'Open',
+    username: '',
+    password: '',
+    attempted: false,
+    user: ''
   };
 
   inputChangeHandler = ({ target }) => {
@@ -25,37 +27,22 @@ class App extends Component {
     });
   };
 
-  checkAuthorization = e => {
-    e.preventDefault();
-    if (
-      this.state.username === this.state.uName &&
-      this.state.password === this.state.uPass
-    ) {
-      this.setState({
-        authenticated: true
-      });
-    }
+  checkAuthorization = event => {
+    event.preventDefault();
+    this.props.login(this.state.username, this.state.password);
     this.setState({
+      username: '',
+      password: '',
       attempted: true
     });
   };
 
-  addNewUser = event => {
-    this.setState({
-      uName: this.state.username,
-      uPass: this.state.password
-    });
-    this.checkAuthorization(event);
-  };
-
   signOutHandler = () => {
-    this.setState({
-      authenticated: false
-    });
+    this.props.signout();
   };
 
   render() {
-    if (!this.state.authenticated) {
+    if (!this.props.authenticated) {
       return (
         <div className="App">
           <header className="App-header">
@@ -79,10 +66,10 @@ class App extends Component {
             <Button onClick={this.signOutHandler}>Sign out</Button>
           </header>
           <Router>
-            <div>
+            <Switch>
               <Route path="/notes" component={NoteList} />
-              <Route path="/note/:id" component={Note} />
-            </div>
+              <Route path="/notes/:id" component={Note} />
+            </Switch>
           </Router>
         </Container>
       </div>
@@ -90,4 +77,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.reducer.user,
+    authenticated: state.reducer.authenticated
+  };
+};
+
+export default connect(mapStateToProps, { addUser, login, signout })(App);

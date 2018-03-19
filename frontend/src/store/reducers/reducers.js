@@ -6,11 +6,16 @@ import {
   DELETING_NOTE,
   NOTE_DELETED,
   UPDATING_NOTE,
-  UPDATED_NOTE
-} from "../actions/actions";
+  UPDATED_NOTE,
+  ADD_USER,
+  VALIDATE,
+  SIGNOUT
+} from '../actions/actions';
 
 const initialState = {
   notes: [],
+  user: null,
+  authenticated: false,
   gettingNotes: false,
   receivedNote: false,
   addingNote: false,
@@ -18,7 +23,7 @@ const initialState = {
   deletingNote: false,
   deletedNote: false,
   updatingNote: false,
-  updatedNote: false,
+  updatedNote: false
 };
 
 export const reducer = (state = initialState, action) => {
@@ -39,6 +44,12 @@ export const reducer = (state = initialState, action) => {
       return { ...state, updatingNote: true };
     case UPDATED_NOTE:
       return { ...state, updatingNote: false, notes: action.payload };
+    case ADD_USER:
+      return { ...state, user: action.payload, authenticated: true };
+    case VALIDATE:
+      return { ...state, user: action.payload, authenticated: true };
+    case SIGNOUT:
+      return { ...state, user: null, authenticated: false };
     default:
       return state;
   }

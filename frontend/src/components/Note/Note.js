@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Checklist from "../Checklist/Checklist";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Checklist from '../Checklist/Checklist';
 import {
   getSingleNote,
   deleteNote,
   updateNote
-} from "../../store/actions/actions";
-import { Row, Col, Button, Input } from "reactstrap";
-import "./Note.css";
+} from '../../store/actions/actions';
+import { Row, Col, Input } from 'reactstrap';
+import './Note.css';
 
 class Note extends Component {
   state = {
-    title: "",
-    text: "",
-    id: "",
-    newTodo: "",
+    title: '',
+    text: '',
+    id: '',
+    newTodo: '',
     checklist: []
   };
 
@@ -39,13 +39,13 @@ class Note extends Component {
     event.preventDefault();
     const note = this.state;
     this.props.updateNote(note);
-    this.props.history.push("/notes");
+    this.props.history.push('/notes');
   };
 
   deleteNoteHandler = (id, history) => {
     console.log(id);
     this.props.deleteNote(id);
-    this.props.history.push("/notes");
+    this.props.history.push('/notes');
   };
 
   inputChangeHandler = ({ target }) => {

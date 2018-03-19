@@ -22,13 +22,24 @@ export const filterByTag = tag => {
       });
   };
 };
-//
-// export const filterByText = (text) => {
-//   return dispatch => {
-//     axios
-//     .get(getUrl)
-//     .then(({ data }) => {
-//       data = data.filter(note )
-//     })
-//   }
-// }
+
+export const filterByText = text => {
+  return dispatch => {
+    axios
+      .get(getUrl)
+      .then(({ data }) => {
+        data = data.filter(note => {
+          const newLength = text.length;
+          const noteTitle = note.title.toLowerCase();
+          if (noteTitle.substring(0, newLength) === text) {
+            return note;
+          }
+          return undefined;
+        });
+        dispatch({ type: BY_TEXT, payload: data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};

@@ -8,6 +8,11 @@ export const filterReducer = (state = filterState, action) => {
   switch (action.type) {
     case BY_TAG:
       return { ...state, notes: action.payload };
+    case BY_TEXT:
+      return {
+        ...state,
+        notes: action.payload
+      };
     default:
       return state;
   }

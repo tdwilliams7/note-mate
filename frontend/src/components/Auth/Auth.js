@@ -1,6 +1,8 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import "./Auth.css";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addUser } from '../../store/actions/actions';
+import './Auth.css';
 
 class Auth extends Component {
   render() {
@@ -28,7 +30,7 @@ class Auth extends Component {
               type="password"
             />
           </div>
-          <div className={this.props.state.attempted ? null : "hidden"}>
+          <div className={this.props.state.attempted ? null : 'hidden'}>
             <h4 className="hidden--text">
               Oh no! something isn't right, or create a new user with that
               Username and Password
@@ -36,10 +38,19 @@ class Auth extends Component {
           </div>
           <button>Log In</button>
         </form>
-        <button onClick={this.props.addNewUser}>Create New user</button>
+        <button
+          onClick={() =>
+            this.props.addUser(
+              this.props.state.username,
+              this.props.state.password
+            )
+          }
+        >
+          Create New user
+        </button>
       </div>
     );
   }
 }
 
-export default Auth;
+export default connect(null, { addUser })(Auth);
